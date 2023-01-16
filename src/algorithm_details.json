@@ -1,47 +1,38 @@
-[
-  {
-    "Name": "Insertion",
+{
+  "Insertion": {
     "Time": "O(n^2)",
     "Space": "O(1)"
   },
-  {
-    "Name": "Selection",
+  "Selection": {
     "Time": "O(n^2)",
     "Space": "O(1)"
   },
-  {
-    "Name": "Merge",
+  "Merge": {
     "Time": "O(n log n)",
     "Space": "O(n)"
   },
-  {
-    "Name": "Quick",
+  "Quick": {
     "Time": "O(n log n)",
     "Space": "O(log n)"
   },
-  {
-    "Name": "Heap",
+  "Heap": {
     "Time": "O(n log n)",
     "Space": "O(1)"
   },
-  {
-    "Name": "Radix",
+  "Radix": {
     "Time": "O(nk)",
     "Space": "O(n + k)"
   },
-  {
-    "Name": "Counting",
+  "Counting": {
     "Time": "O(n + k)",
     "Space": "O(k)"
   },
-  {
-    "Name": "Shell",
+  "Shell": {
     "Time": "O(n^2)",
     "Space": "O(1)"
   },
-  {
-    "Name": "TimSort",
+  "TimSort": {
     "Time": "O(n log n)",
     "Space": "O(n)"
   }
-]
+}
