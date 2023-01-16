@@ -14,9 +14,42 @@ This project is a visual representation of various sorting algorithms such as [b
 
 ## To-Do List
 
-- [ ] Implement Sorting Algorithms
+- [ ] <details><summary>Implement Sorting Algorithms</summary>
+  - [ ] Bubble Sort
+  - [ ] Insertion Sort
+  - [ ] Selection Sort
+  - [ ] Merge Sort
+  - [ ] Quick Sort
+  - [ ] Heap sort
+  - [ ] Radix Sort
+  - [ ] Counting Sort
+  - [ ] Shell Sort
+  - [ ] TimSort</details>
 - [ ] Create GUI
-- [ ] 
+  - [ ] Array Visualiser
+  - [ ] Algorithm Information Panel
+  - [ ] Algorithm Selector
+    - Dropdown Menu
+  - [ ] Array Size Selector
+    - Slider
+  - [ ] Controls
+    - Keybindings
+      - [ ] Sort Keybind (Space, Toggle)
+      - [ ] Reset Array Keybind (R)
+    - Dropdown Menu
+      - [ ] Array Type
+        - [ ] Random (Default)
+        - [ ] Random (No Duplicates)
+        - [ ] Nearly Sorted
+        - [ ] Sorted
+      - [ ] Sort Direction
+        - [ ] Ascending (Default)
+        - [ ] Descending
+      - [ ] Sort Speed
+        - [ ] Slow
+        - [ ] Medium (Default)
+        - [ ] Fast
+- [ ] Connect GUI to Sorting Algorithms
 
 ---
 
