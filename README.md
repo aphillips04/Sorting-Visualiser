@@ -14,8 +14,7 @@ This project is a visual representation of various sorting algorithms such as [b
 
 ## To-Do List
 
-- [ ] <details><summary>Implement Sorting Algorithms</summary>
-  - [ ] Bubble Sort
+- [ ] Implement Sorting Algorithms
   - [ ] Insertion Sort
   - [ ] Selection Sort
   - [ ] Merge Sort
@@ -24,7 +23,7 @@ This project is a visual representation of various sorting algorithms such as [b
   - [ ] Radix Sort
   - [ ] Counting Sort
   - [ ] Shell Sort
-  - [ ] TimSort</details>
+  - [ ] TimSort
 - [ ] Create GUI
   - [ ] Array Visualiser
   - [ ] Algorithm Information Panel
@@ -50,7 +49,6 @@ This project is a visual representation of various sorting algorithms such as [b
         - [ ] Medium (Default)
         - [ ] Fast
 - [ ] Connect GUI to Sorting Algorithms
-
 ---
 
 ## Installation
