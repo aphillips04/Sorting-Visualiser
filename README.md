@@ -15,14 +15,14 @@ This project is a visual representation of various sorting algorithms such as [b
 ## To-Do List
 
 - [ ] Implement Sorting Algorithms
-  - [ ] Bubble Sort
-  - [ ] Insertion Sort
-  - [ ] Selection Sort
-  - [ ] Merge Sort
-  - [ ] Quick Sort
-  - [ ] Heap sort
+  - [x] Bubble Sort
+  - [x] Insertion Sort
+  - [x] Selection Sort
+  - [x] Merge Sort
+  - [x] Quick Sort
+  - [x] Heap sort
   - [ ] Radix Sort
-  - [ ] Counting Sort
+  - [x] Counting Sort
   - [ ] Shell Sort
   - [ ] TimSort
 - [ ] Create GUI
