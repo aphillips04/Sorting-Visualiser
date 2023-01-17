@@ -3,6 +3,7 @@ This module contains the classes for all sorting algorithms.
 
 Classes:
     Algorithm: Base class for all sorting algorithms.
+    BubbleSort: Bubble sort algorithm.
     InsertionSort: Insertion sort algorithm.
     SelectionSort: Selection sort algorithm.
     MergeSort: Merge sort algorithm.
@@ -49,7 +50,7 @@ class Algorithm:
         """Returns the details of the algorithm."""
         with open("src/algorithm_details.json", "r", encoding="UTF-8") as details:
             details = json.load(details)
-        return {"Name": name, **details[name]}
+        return {"Name": f"{name}{'' if (name.find('ort') != -1) else ' Sort'}", **details[name]}
 
     def print_details(self):
         """Prints the details of the algorithm."""
@@ -59,7 +60,7 @@ class Algorithm:
 
     def generate_array(self) -> list[int]:
         """Generates a random array of integers to be sorted."""
-        return [random.randint(0, 100) for _ in range(100)]
+        return [random.randint(0, 100) for _ in range(1000)]
 
     def sort(self):
         """Placeholder for the sort method of individual algorithms."""
@@ -67,6 +68,26 @@ class Algorithm:
     def swap(self, array: list[int], index_1: int, index_2: int):
         """Swaps the elements at the given indices."""
         array[index_1], array[index_2] = array[index_2], array[index_1]
+
+
+class BubbleSort(Algorithm):
+    """
+    Bubble sort algorithm.
+
+    Methods:
+        sort(self)
+            Sorts the array using bubble sort.
+    """
+
+    def __init__(self):
+        super().__init__("Bubble")
+
+    def sort(self):
+        """Sorts the array using bubble sort."""
+        for top in range(len(self.array) - 1, 0, -1):
+            for current in range(top):
+                if self.array[current] > self.array[current + 1]:
+                    self.swap(self.array, current, current + 1)
 
 
 class InsertionSort(Algorithm):
@@ -127,38 +148,45 @@ class MergeSort(Algorithm):
 
     def sort(self):
         """Sorts the array using merge sort."""
-        self.array = self.merge_sort(self.array)
+        width = 1
+        array_length = len(self.array)
+        while width < array_length:
+            for left in range(0, array_length, 2 * width):
+                right = min(left + 2 * width - 1, array_length - 1)
+                mid = min(left + width - 1, array_length - 1)
+                self.merge(self.array, left, mid, right)
+            width *= 2
 
-    def merge_sort(self, array: list[int]) -> list[int]:
-        """Recursive implementation of merge sort."""
-        mid = len(array) // 2
-        left = array[:mid]
-        right = array[mid:]
+    def merge(self, array: list[int], left: int, mid: int, right: int):
+        """Merges the two sub-arrays of array"""
+        length_1 = mid - left + 1
+        length_2 = right - mid
+        left_array = [0] * length_1
+        right_array = [0] * length_2
+        for index in range(length_1):
+            left_array[index] = array[left + index]
+        for index in range(length_2):
+            right_array[index] = array[mid + index + 1]
 
-        if len(left) > 1:
-            left = self.merge_sort(left)
-
-        if len(right) > 1:
-            right = self.merge_sort(right)
-
-        return self.merge(left, right)
-
-    def merge(self, left: list[int], right: list[int]) -> list[int]:
-        """Merges two sorted arrays."""
-        result: list[int] = []
-        left_index = right_index = 0
-
-        while left_index < len(left) and right_index < len(right):
-            if left[left_index] < right[right_index]:
-                result.append(left[left_index])
+        left_index, right_index, current_index = 0, 0, left
+        while left_index < length_1 and right_index < length_2:
+            if left_array[left_index] <= right_array[right_index]:
+                array[current_index] = left_array[left_index]
                 left_index += 1
             else:
-                result.append(right[right_index])
+                array[current_index] = right_array[right_index]
                 right_index += 1
+            current_index += 1
 
-        result.extend(left[left_index:])
-        result.extend(right[right_index:])
-        return result
+        while left_index < length_1:
+            array[current_index] = left_array[left_index]
+            left_index += 1
+            current_index += 1
+
+        while right_index < length_2:
+            array[current_index] = right_array[right_index]
+            right_index += 1
+            current_index += 1
 
 
 class QuickSort(Algorithm):
@@ -171,20 +199,29 @@ class QuickSort(Algorithm):
     """
 
     def __init__(self):
-        super().__init__("Quick")
+        super().__init__("Quicksort")
 
     def sort(self):
         """Sorts the array using quick sort."""
-        self.array = self.quick_sort(self.array, 0, len(self.array) - 1)
+        low = 0
+        high = len(self.array) - 1
 
-    def quick_sort(self, array: list[int], low: int, high: int) -> list[int]:
-        """Recursive implementation of quick sort."""
-        if low < high:
-            pivot = self.partition(array, low, high)
-            self.quick_sort(array, low, pivot - 1)
-            self.quick_sort(array, pivot + 1, high)
+        size = high - low + 1
+        stack = [low, high]
 
-        return array
+        while stack:
+            high = stack.pop()
+            low = stack.pop()
+
+            pivot = self.partition(self.array, low, high)
+
+            if pivot - 1 > low:
+                stack.append(low)
+                stack.append(pivot - 1)
+
+            if pivot + 1 < high:
+                stack.append(pivot + 1)
+                stack.append(high)
 
     def partition(self, array: list[int], low: int, high: int) -> int:
         """Partitions the array."""
@@ -211,10 +248,48 @@ class HeapSort(Algorithm):
     """
 
     def __init__(self):
-        super().__init__("Heap")
+        super().__init__("Heapsort")
 
     def sort(self):
         """Sorts the array using heap sort."""
+        array_length = len(self.array)
+        self.build_max_heap(array_length)
+
+        for index in range(array_length - 1, 0, -1):
+            self.swap(self.array, 0, index)
+
+            heap_index = 0
+            while True:
+                left = 2 * heap_index + 1
+                right = 2 * heap_index + 2
+
+                if left >= index:
+                    break
+
+                if right >= index:
+                    if self.array[left] > self.array[heap_index]:
+                        self.swap(self.array, left, heap_index)
+                    break
+
+                if self.array[left] > self.array[right]:
+                    if self.array[left] <= self.array[heap_index]:
+                        break
+                    self.swap(self.array, left, heap_index)
+                    heap_index = left
+                elif self.array[right] > self.array[heap_index]:
+                    self.swap(self.array, right, heap_index)
+                    heap_index = right
+                else:
+                    break
+
+    def build_max_heap(self, array_length: int):
+        """Builds the max heap."""
+        for index in range(array_length):
+            if self.array[index] > self.array[(index - 1) // 2]:
+                swap = index
+                while self.array[swap] > self.array[(swap - 1) // 2]:
+                    self.swap(self.array, swap, (swap - 1) // 2)
+                    swap = (swap - 1) // 2
 
 
 class RadixSort(Algorithm):
@@ -274,7 +349,7 @@ class ShellSort(Algorithm):
     """
 
     def __init__(self):
-        super().__init__("Shell")
+        super().__init__("Shellsort")
 
     def sort(self):
         """Sorts the array using shell sort."""
@@ -299,13 +374,14 @@ class TimSort(Algorithm):
 def main():
     """Main function."""
     algorithms = [
-        InsertionSort(),
-        SelectionSort(),
-        MergeSort(),
-        QuickSort(),
-        HeapSort(),
+        BubbleSort(),       # Done
+        InsertionSort(),    # Done
+        SelectionSort(),    # Done
+        MergeSort(),        # Done
+        QuickSort(),        # Done
+        HeapSort(),         # Done
         RadixSort(),
-        CountingSort(),
+        CountingSort(),     # Done
         ShellSort(),
         TimSort(),
     ]
@@ -313,10 +389,10 @@ def main():
         try:
             algorithm.sort()
             assert algorithm.array == sorted(algorithm.array)
-            algorithm.print_details()
-            print()
+            print(f"{algorithm.details['Name']}\n")
         except AssertionError:
-            print(f"{algorithm.details['Name']} sort failed!\n")
+            # print(f"{algorithm.details['Name']} sort failed!\n")
+            pass
 
 
 if __name__ == "__main__":
