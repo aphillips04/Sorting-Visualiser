@@ -21,7 +21,7 @@ This project is a visual representation of various sorting algorithms such as [b
   - [x] Merge Sort
   - [x] Quick Sort
   - [x] Heap sort
-  - [ ] Radix Sort
+  - [x] Radix Sort
   - [x] Counting Sort
   - [ ] Shell Sort
   - [ ] TimSort

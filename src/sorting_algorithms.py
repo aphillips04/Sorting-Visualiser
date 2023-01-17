@@ -302,6 +302,34 @@ class RadixSort(Algorithm):
 
     def sort(self):
         """Sorts the array using radix sort."""
+        max_1 = max(self.array)
+
+        exponent = 1
+        while max_1 / exponent >= 1:
+            self.counting_sort(exponent)
+            exponent *= 10
+
+    def counting_sort(self, exponent: int):
+        """Sorts the array using counting sort."""
+        length = len(self.array)
+        output = [0] * length
+        count = [0] * 10
+
+        for current in range(length):
+            index = self.array[current] // exponent
+            count[index % 10] += 1
+
+        for current in range(1, 10):
+            count[current] += count[current - 1]
+
+        current = length - 1
+        while current >= 0:
+            index = self.array[current] // exponent
+            output[count[index % 10] - 1] = self.array[current]
+            count[index % 10] -= 1
+            current -= 1
+
+        self.array = output
 
 
 class CountingSort(Algorithm):
@@ -376,7 +404,7 @@ def main():
         MergeSort(),        # Done
         QuickSort(),        # Done
         HeapSort(),         # Done
-        RadixSort(),
+        RadixSort(),        # Done
         CountingSort(),     # Done
         ShellSort(),
         TimSort(),
