@@ -203,11 +203,7 @@ class QuickSort(Algorithm):
 
     def sort(self):
         """Sorts the array using quick sort."""
-        low = 0
-        high = len(self.array) - 1
-
-        size = high - low + 1
-        stack = [low, high]
+        stack = [0, len(self.array) - 1]
 
         while stack:
             high = stack.pop()
