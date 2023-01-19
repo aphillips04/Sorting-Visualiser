@@ -23,8 +23,8 @@ This project is a visual representation of various sorting algorithms such as [b
   - [x] Heap sort
   - [x] Radix Sort
   - [x] Counting Sort
-  - [ ] Shell Sort
-  - [ ] TimSort
+  - [x] Shell Sort
+  - [x] TimSort
 - [ ] Create GUI
   - [ ] Array Visualiser
   - [ ] Algorithm Information Panel
