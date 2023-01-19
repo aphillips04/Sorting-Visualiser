@@ -377,6 +377,18 @@ class ShellSort(Algorithm):
 
     def sort(self):
         """Sorts the array using shell sort."""
+        length = len(self.array)
+        gap = length // 2
+
+        while gap > 0:
+            index = gap
+            while index < length:
+                current = index - gap
+                while current >= 0 and self.array[current] > self.array[current + gap]:
+                    self.swap(self.array, current, current + gap)
+                    current -= gap
+                index += 1
+            gap //= 2
 
 
 class TimSort(Algorithm):
@@ -393,6 +405,68 @@ class TimSort(Algorithm):
 
     def sort(self):
         """Sorts the array using tim sort."""
+        length = len(self.array)
+        minimum_run = self.get_minimum_run(length)
+
+        for start in range(0, length, minimum_run):
+            end = min(start + minimum_run - 1, length - 1)
+            self.insertion_sort(start, end)
+
+        size = minimum_run
+        while size < length:
+            for left in range(0, length, 2 * size):
+                mid = min(length - 1, left + size - 1)
+                right = min(length - 1, left + 2 * size - 1)
+                if mid < right:
+                    self.merge(self.array, left, mid, right)
+            size *= 2
+
+    def get_minimum_run(self, length: int) -> int:
+        """Gets the minimum run."""
+        run = 0
+        while length >= 64:
+            run |= length & 1
+            length >>= 1
+        return length + run
+
+    def insertion_sort(self, start: int, end: int):
+        """Sorts the array using insertion sort."""
+        for index in range(start + 1, end + 1):
+            current = index - 1
+            while current >= start and self.array[current] > self.array[current + 1]:
+                self.swap(self.array, current, current + 1)
+                current -= 1
+
+    def merge(self, array: list[int], left: int, mid: int, right: int):
+        """Merges the array."""
+        length_1 = mid - left + 1
+        length_2 = right - mid
+        left_array = [0] * length_1
+        right_array = [0] * length_2
+        for index in range(length_1):
+            left_array[index] = array[left + index]
+        for index in range(length_2):
+            right_array[index] = array[mid + index + 1]
+
+        left_index, right_index, current_index = 0, 0, left
+        while left_index < length_1 and right_index < length_2:
+            if left_array[left_index] <= right_array[right_index]:
+                array[current_index] = left_array[left_index]
+                left_index += 1
+            else:
+                array[current_index] = right_array[right_index]
+                right_index += 1
+            current_index += 1
+
+        while left_index < length_1:
+            array[current_index] = left_array[left_index]
+            left_index += 1
+            current_index += 1
+
+        while right_index < length_2:
+            array[current_index] = right_array[right_index]
+            right_index += 1
+            current_index += 1
 
 
 def main():
