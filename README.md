@@ -14,7 +14,7 @@ This project is a visual representation of various sorting algorithms such as [b
 
 ## To-Do List
 
-- [ ] Implement Sorting Algorithms
+- [x] Implement Sorting Algorithms
   - [x] Bubble Sort
   - [x] Insertion Sort
   - [x] Selection Sort
