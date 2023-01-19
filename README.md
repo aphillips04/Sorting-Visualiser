@@ -28,27 +28,33 @@ This project is a visual representation of various sorting algorithms such as [b
 - [ ] Create GUI
   - [ ] Array Visualiser
   - [ ] Algorithm Information Panel
-  - [ ] Algorithm Selector
+    - Status Bar
+    - Name
+    - Time Complexity
+    - Space Complexity
+  - [x] Algorithm Selector
     - Dropdown Menu
   - [ ] Array Size Selector
     - Slider
-  - [ ] Controls
+  - [x] Controls
     - Keybindings
-      - [ ] Sort Keybind (Space, Toggle)
-      - [ ] Reset Array Keybind (R)
+      - [x] Sort Keybind (Space, Toggle)
+      - [x] Reset Array Keybind (R)
     - Dropdown Menu
-      - [ ] Array Type
-        - [ ] Random (Default)
-        - [ ] Random (No Duplicates)
-        - [ ] Nearly Sorted
-        - [ ] Sorted
-      - [ ] Sort Direction
-        - [ ] Ascending (Default)
-        - [ ] Descending
-      - [ ] Sort Speed
-        - [ ] Slow
-        - [ ] Medium (Default)
-        - [ ] Fast
+      - [x] Sort
+      - [x] Reset
+      - [x] Array Type
+        - [x] Random (Default)
+        - [x] Random (Unique)
+        - [x] Nearly Sorted
+        - [x] Sorted
+      - [x] Sort Direction
+        - [x] Ascending (Default)
+        - [x] Descending
+      - [x] Sort Speed
+        - [x] Slow
+        - [x] Medium (Default)
+        - [x] Fast
 - [ ] Connect GUI to Sorting Algorithms
 ---
 
