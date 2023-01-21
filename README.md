@@ -28,7 +28,6 @@ This project is a visual representation of various sorting algorithms such as [b
 - [ ] Create GUI
   - [ ] Array Visualiser
   - [ ] Algorithm Information Panel
-    - Status Bar
     - Name
     - Time Complexity
     - Space Complexity
